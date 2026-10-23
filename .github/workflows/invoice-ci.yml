@@ -1,4 +1,4 @@
-```yaml
+
 name: Invoice Service CI/CD
 
 on:
