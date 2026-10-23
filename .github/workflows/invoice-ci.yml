@@ -46,4 +46,3 @@ jobs:
           context: invoice-service
           push: true
           tags: ghcr.io/${{ github.repository }}/invoice-service:latest
-```
