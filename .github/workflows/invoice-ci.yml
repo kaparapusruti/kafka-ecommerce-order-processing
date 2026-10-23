@@ -1,0 +1,48 @@
+
+name: Invoice Service CI/CD
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'invoice-service/**'
+      - '.github/workflows/invoice-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+          cache-dependency-path: invoice-service/pom.xml
+
+      - name: Build Invoice Service
+        run: mvn -B -f invoice-service/pom.xml package -DskipTests
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: invoice-service
+          push: true
+          tags: ghcr.io/${{ github.repository }}/invoice-service:latest
