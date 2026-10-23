@@ -31,7 +31,7 @@ jobs:
           cache-dependency-path: invoice-service/pom.xml
 
       - name: Build Invoice Service
-        run: mvn -B -f invoice-service/pom.xml package -DskipTests
+       run: mvn -B -f invoice-service/pom.xml verify
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
