@@ -1,3 +1,26 @@
+<<<<<<< HEAD
+*
+
+!.gitignore
+
+!order-service/
+!order-service/**
+
+!payment-service/
+!payment-service/**
+
+!delivery-service/
+!delivery-service/**
+
+!notification-service/
+!notification-service/**
+
+**/target/
+**/.settings/
+**/.classpath
+**/.project
+**/*.log
+=======
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -31,3 +54,4 @@ build/
 
 ### VS Code ###
 .vscode/
+>>>>>>> bedbb57 (fix error)
